@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Laptops | Student Laptop Finder</title>
+    <link rel="stylesheet" href="dist/output.css" />
+    <script src="src/js/theme-init.js"></script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header id="site-header" class="sticky top-0 z-20 border-b border-line bg-surface"></header>
+
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+      <h1 class="text-3xl font-extrabold">Laptop catalogue</h1>
+      <p class="mt-1 mb-6 text-muted">Search by name or brand, then narrow the list with the filters.</p>
+
+      <form id="filters" class="panel grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <label class="text-sm font-medium lg:col-span-2">Search
+          <input id="search" type="search" placeholder="Name or brand, e.g. Lenovo" class="field" autocomplete="off" />
+        </label>
+        <label class="text-sm font-medium">Category
+          <select id="category" class="field">
+            <option value="all">All categories</option>
+            <option value="ultrabook">Ultrabook</option>
+            <option value="gaming">Gaming</option>
+            <option value="2-in-1">2-in-1</option>
+            <option value="creator">Creator</option>
+            <option value="budget">Budget</option>
+          </select>
+        </label>
+        <label class="text-sm font-medium">Sort by
+          <select id="sort" class="field">
+            <option value="none">Default order</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="battery-desc">Battery: longest first</option>
+            <option value="battery-asc">Battery: shortest first</option>
+            <option value="weight-asc">Weight: lightest first</option>
+            <option value="weight-desc">Weight: heaviest first</option>
+          </select>
+        </label>
+        <label class="text-sm font-medium lg:col-span-2">Maximum price: <span id="max-price-label" class="font-bold text-accent"></span>
+          <input id="max-price" type="range" step="500" min="0" max="150000" value="150000" class="mt-3 block w-full accent-accent" />
+        </label>
+        <label class="text-sm font-medium">Minimum RAM
+          <select id="min-ram" class="field">
+            <option value="0">Any</option>
+            <option value="8">8 GB or more</option>
+            <option value="16">16 GB or more</option>
+            <option value="32">32 GB or more</option>
+          </select>
+        </label>
+        <div class="flex items-end">
+          <button id="reset-filters" type="button" class="btn-outline w-full">Reset filters</button>
+        </div>
+      </form>
+
+      <p id="result-count" class="my-6 text-sm text-muted" aria-live="polite"></p>
+      <div id="laptop-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </main>
+
+    <footer id="site-footer" class="border-t border-line bg-surface py-6 text-center text-sm text-muted"></footer>
+
+    <script type="module" src="src/js/catalogue.js"></script>
+  </body>
+</html>

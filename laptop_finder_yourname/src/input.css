@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* Official plugin: styles form controls (search box, selects, range, checkboxes) */
+@plugin "@tailwindcss/forms";
+
+/* Theme tokens. These are the Performance Mode (dark + orange) defaults. */
+@theme {
+  --color-page: #0e0f13;
+  --color-surface: #181a20;
+  --color-ink: #f3f4f6;
+  --color-muted: #a1a8b5;
+  --color-line: #2c303a;
+  --color-accent: #f97316;
+  --color-accent-ink: #111111;
+  --color-accent-soft: #3a2210;
+  --color-danger: #f87171;
+}
+
+/* Battery Saver Mode (light + green): same tokens, different values.
+   Every utility such as bg-page or text-accent reads these variables,
+   so changing data-theme on <html> restyles the whole page. */
+[data-theme="battery"] {
+  color-scheme: light;
+  --color-page: #f2f8f3;
+  --color-surface: #ffffff;
+  --color-ink: #14281d;
+  --color-muted: #4a5f52;
+  --color-line: #cfe0d4;
+  --color-accent: #15803d;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #dcfce7;
+  --color-danger: #b91c1c;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-page text-ink transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* Laptop card: used on the catalogue, the favorites page and the skeletons */
+  .laptop-card {
+    @apply flex flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-lg focus-within:border-accent;
+  }
+
+  /* Main action button: cards, hero, details page, favorites page */
+  .btn-action {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-ink transition duration-200 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Secondary button with an outline */
+  .btn-outline {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-line px-4 py-2 text-sm font-semibold text-ink transition duration-200 hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  /* Plain box used for filters, stats, messages and tables */
+  .panel {
+    @apply rounded-xl border border-line bg-surface p-4;
+  }
+
+  /* Form controls: colors come from the theme, the plugin handles the rest */
+  .field {
+    @apply mt-1 w-full rounded-lg border-line bg-page text-ink placeholder:text-muted focus:border-accent focus:ring-accent;
+  }
+
+  .nav-link {
+    @apply rounded-lg px-3 py-2 text-sm font-medium text-muted transition duration-200 hover:bg-accent-soft hover:text-accent;
+  }
+
+  .nav-link[aria-current="page"] {
+    @apply bg-accent-soft text-accent;
+  }
+}
